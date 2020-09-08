@@ -1,0 +1,4 @@
+framework module SwiftHash {
+  header "SwiftHash-Swift.h"
+  requires objc
+}
