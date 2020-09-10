@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct HeroData: Codable {
+struct Hero: Codable {
     public var id: Int?
     public var name: String?
     public var desc: String?
-    public var thumbnail: HeroThumbnailData?
-    public var urls: [MarvelURLData]?
+    public var thumbnail: HeroThumbnail?
+    public var urls: [MarvelURL]?
     
     enum CodingKeys: String, CodingKey {
         case id = "id"

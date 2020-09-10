@@ -8,14 +8,15 @@
 
 import Foundation
 import CoreData
+import UIKit
 
-class DetailHeroViewModel {
+class DetailHeroViewModel: NSObject {
     
-    var hero: HeroData?
-    var marvelURL: [MarvelURLData]? {
+    var hero: Hero?
+    var marvelURL: [MarvelURL]? {
         get {
             guard let urls = self.hero?.urls else { return nil }
-            return urls
+            return urls as! [MarvelURL]
         }
     }
     
@@ -32,6 +33,16 @@ class DetailHeroViewModel {
             array.append(marvelURL.type!)
         }
         return array
+    }
+    
+    func saveHero(_ context: NSManagedObjectContext) {
+        let entity = NSEntityDescription.entity(forEntityName: "Hero", in: context)!
+        let _ = NSManagedObject(entity: entity, insertInto: context)
+        do {
+            try context.save()
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
 }

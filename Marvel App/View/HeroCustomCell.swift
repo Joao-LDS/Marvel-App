@@ -50,7 +50,16 @@ class HeroCustomCell: UICollectionViewCell {
     
     // MARK: - Methods
     
-    func configureCell(hero: HeroData) {
+    func configureCell(hero: Hero) {
+        if let thumbnail = hero.thumbnail, let name = hero.name {
+            let url = URL(string: thumbnail.url)
+            namelabel.text = name.uppercased()
+            imageView.kf.setImage(with: url)
+            imageView.kf.indicatorType = .activity
+        }
+    }
+    
+    func configureCellWith(hero: Hero) {
         if let thumbnail = hero.thumbnail, let name = hero.name {
             let url = URL(string: thumbnail.url)
             namelabel.text = name.uppercased()

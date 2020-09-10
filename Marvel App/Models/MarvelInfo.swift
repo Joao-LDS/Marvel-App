@@ -8,10 +8,10 @@
 
 import Foundation
 
-typealias MarvelInfos = MarvelInfoData
+//typealias MarvelInfos = MarvelInfoData
 
-struct MarvelInfoData: Codable {
+struct MarvelInfo: Codable {
     public var code: Int?
     public var status: String?
-    public var data: MarvelDataData?
+    public var data: MarvelData?
 }

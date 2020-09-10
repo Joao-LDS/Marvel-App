@@ -80,9 +80,17 @@ class DetailHeroViewController: UIViewController {
         return view
     }()
     
+    lazy var imageFavoriteButton: UIImageView = {
+        let view = UIImageView()
+        view.image = #imageLiteral(resourceName: "add-to-favorites")
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     lazy var favoriteButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "add-to-favorites"), for: .normal)
+        button.backgroundColor = .red
+        button.layer.cornerRadius = 25
         button.addTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -90,7 +98,7 @@ class DetailHeroViewController: UIViewController {
     
     // MARK: - Init
     
-    init(_ hero: HeroData) {
+    init(_ hero: Hero) {
         viewModel.hero = hero
         print(hero)
         super.init(nibName: nil, bundle: nil)
@@ -137,7 +145,8 @@ class DetailHeroViewController: UIViewController {
     }
     
     @objc func favoriteButtonTapped() {
-        print("\(viewModel.hero)")
+        print("\(viewModel.hero!)")
+        viewModel.saveHero(self.context)
     }
 }
 
@@ -147,6 +156,7 @@ extension DetailHeroViewController: ConfigureView {
     func addView() {
         view.addSubview(scrollView)
         closeButton.addSubview(imageCloseButton)
+        favoriteButton.addSubview(imageFavoriteButton)
         scrollView.addSubview(imageView)
         scrollView.addSubview(closeButton)
         scrollView.addSubview(favoriteButton)
@@ -166,6 +176,11 @@ extension DetailHeroViewController: ConfigureView {
             favoriteButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -18),
             favoriteButton.widthAnchor.constraint(equalToConstant: 45),
             favoriteButton.heightAnchor.constraint(equalToConstant: 45),
+            
+            imageFavoriteButton.widthAnchor.constraint(equalToConstant: 25),
+            imageFavoriteButton.heightAnchor.constraint(equalToConstant: 25),
+            imageFavoriteButton.centerYAnchor.constraint(equalTo: favoriteButton.centerYAnchor),
+            imageFavoriteButton.centerXAnchor.constraint(equalTo: favoriteButton.centerXAnchor),
             
             closeButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 18),
             closeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),

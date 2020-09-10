@@ -30,6 +30,26 @@ class MainViewController: UIViewController {
         collection.translatesAutoresizingMaskIntoConstraints = false
         return collection
     }()
+    
+    lazy var imageFavoriteButton: UIImageView = {
+        let view = UIImageView()
+        view.image = #imageLiteral(resourceName: "add-to-favorites")
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var favoriteButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .red
+        button.layer.cornerRadius = 28
+        button.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        button.layer.shadowOffset = .zero
+        button.layer.shadowRadius = 8
+        button.layer.shadowOpacity = 0.5
+        button.addTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
 
     // MARK: - View Lifecicle
     
@@ -66,6 +86,11 @@ class MainViewController: UIViewController {
 
     @objc func dismissKeyboard() {
         searchBar.resignFirstResponder()
+    }
+    
+    @objc func favoriteButtonTapped() {
+        let vc = FavoriteListViewController()
+        present(vc, animated: true, completion: nil)
     }
 }
 
@@ -122,7 +147,9 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
 
 extension MainViewController: ConfigureView {
     func addView() {
+        favoriteButton.addSubview(imageFavoriteButton)
         view.addSubview(collection)
+        view.addSubview(favoriteButton)
     }
     
     func addConstraints() {
@@ -130,7 +157,17 @@ extension MainViewController: ConfigureView {
             collection.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor),
             collection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collection.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            collection.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            favoriteButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -18),
+            favoriteButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
+            favoriteButton.widthAnchor.constraint(equalToConstant: 55),
+            favoriteButton.heightAnchor.constraint(equalToConstant: 55),
+            
+            imageFavoriteButton.widthAnchor.constraint(equalToConstant: 25),
+            imageFavoriteButton.heightAnchor.constraint(equalToConstant: 25),
+            imageFavoriteButton.centerYAnchor.constraint(equalTo: favoriteButton.centerYAnchor),
+            imageFavoriteButton.centerXAnchor.constraint(equalTo: favoriteButton.centerXAnchor)
         ])
     }
     

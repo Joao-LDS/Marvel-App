@@ -8,10 +8,10 @@
 
 import Foundation
 
-struct MarvelDataData: Codable {
+struct MarvelData: Codable {
     public var offset: Int?
     public var limit: Int?
     public var total: Int?
     public var count: Int?
-    public var results: [HeroData]?
+    public var results: [Hero]?
 }

@@ -14,23 +14,34 @@ protocol MainViewModelDelegate {
 
 class MainViewModel {
     
-    var heroes: [HeroData] = []
+    var heroes: [Hero] = []
     var delegate: MainViewModelDelegate?
     lazy var service = MarvelAPI()
     var currentPage = 0
     var total = 0 // Armazena o total de heróis que a API retorna, serva para saber se precisamos pedir mais ou não.
     var nameHero = ""
+    let persistenceService = PersistenceService.shared
     
     func fetchHeroes(newRequest: Bool) {
-        service.request(name: nameHero, page: currentPage) { response in
-            if let response = response, let results = response.data?.results, let total = response.data?.total {
-                if newRequest {
-                    self.heroes = results
-                } else {
-                    self.heroes += results
+        service.request(name: nameHero, page: currentPage) { result in
+            switch result {
+            case .success(let data):
+                do {
+                    let json = try JSONDecoder().decode(MarvelInfo.self, from: data)
+                    if let heroes = json.data?.results, let total = json.data?.total {
+                        if newRequest {
+                            self.heroes = heroes
+                        } else {
+                            self.heroes += heroes
+                        }
+                        self.total = total
+                        self.delegate?.reloadCollection()
+                    }
+                } catch {
+                    print(error.localizedDescription)
                 }
-                self.total = total
-                self.delegate?.reloadCollection()
+            case .failure(let error):
+                print(error)
             }
         }
     }

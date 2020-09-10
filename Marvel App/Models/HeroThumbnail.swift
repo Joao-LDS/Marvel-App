@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct HeroThumbnailData: Codable {
+struct HeroThumbnail: Codable {
     public var path: String?
     public var ext: String?
     

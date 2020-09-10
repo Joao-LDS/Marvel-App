@@ -8,7 +8,6 @@
 
 
 import SwiftHash
-import Alamofire
 import CoreData
 import UIKit
 
@@ -20,6 +19,7 @@ class MarvelAPI {
     /* Cada página da requisição vem com um número limitado de heróis,
     esse número é dado por limitHeroForRequest. */
     private let limitHeroForRequest = 40
+    private let persistenceService = PersistenceService.shared
     
     private func parametersToAuthenticationApi() -> String {
         // Timestamp is a random number, must change on a request by request
@@ -30,7 +30,7 @@ class MarvelAPI {
         return parameters
     }
     
-    func request(name: String?, page: Int = 0, completion: @escaping(MarvelInfoData?) -> Void) {
+    func request(name: String?, page: Int = 0, completion: @escaping(Result<Data, Error>) -> Void) {
         /* É o range de heróis que vão retornar no JSON. Por ex, na primeira request vem os 20 primeiros,
          na segunda os próximos 20, e assim por diante. */
         let offset = limitHeroForRequest * page
@@ -43,22 +43,17 @@ class MarvelAPI {
             startsWith = ""
         }
         
-        let url = basePath + "offset=\(offset)&limit=\(limitHeroForRequest)&\(startsWith)&\(parametersToAuthenticationApi())"
+        let url = URL(string: basePath + "offset=\(offset)&limit=\(limitHeroForRequest)&\(startsWith)&\(parametersToAuthenticationApi())")!
         print(url)
         
-        AF.request(url).responseJSON { response in
-            switch response.result {
-            case .success:
-                guard let data = response.data else { return }
-                if let marvelInfo = try? JSONDecoder().decode(MarvelInfos.self, from: data) {
-                    print(marvelInfo)
-                    completion(marvelInfo)
-                } else {
-                    completion(nil)
-                }
-            case .failure(let error):
-                print(error)
+        let session = URLSession.shared
+        let task = session.dataTask(with: url) { (data, _, error) in
+            if let error = error {
+                DispatchQueue.main.async { completion(.failure(error)) }
+            } else if let data = data {
+                DispatchQueue.main.async { completion(.success(data)) }
             }
         }
+        task.resume()
     }
 }

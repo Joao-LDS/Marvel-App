@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct MarvelURLData: Codable {
+struct MarvelURL: Codable {
     public var type: String?
     public var url: String?
 }
