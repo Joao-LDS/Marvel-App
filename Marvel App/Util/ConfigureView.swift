@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Stevia
 
 protocol ConfigureView {
     func addView()

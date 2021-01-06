@@ -1,0 +1,22 @@
+PODS:
+  - Kingfisher (5.15.7):
+    - Kingfisher/Core (= 5.15.7)
+  - Kingfisher/Core (5.15.7)
+  - SwiftHash (2.0.2)
+
+DEPENDENCIES:
+  - Kingfisher (~> 5.0)
+  - SwiftHash
+
+SPEC REPOS:
+  trunk:
+    - Kingfisher
+    - SwiftHash
+
+SPEC CHECKSUMS:
+  Kingfisher: 6e1a13523fcb1c86924ce53affe4ac957e544d59
+  SwiftHash: 6d312abe61c8359bdef8d0093642f3a70b1c17ba
+
+PODFILE CHECKSUM: 3a3f3316819b110b17c7c21903b3b25813189c09
+
+COCOAPODS: 1.10.0

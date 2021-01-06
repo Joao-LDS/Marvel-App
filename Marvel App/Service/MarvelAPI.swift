@@ -8,7 +8,6 @@
 
 
 import SwiftHash
-import CoreData
 import UIKit
 
 class MarvelAPI {
@@ -19,7 +18,7 @@ class MarvelAPI {
     /* Cada página da requisição vem com um número limitado de heróis,
     esse número é dado por limitHeroForRequest. */
     private let limitHeroForRequest = 40
-    private let persistenceService = PersistenceService.shared
+//    private let persistenceService = PersistenceService.shared
     
     private func parametersToAuthenticationApi() -> String {
         // Timestamp is a random number, must change on a request by request

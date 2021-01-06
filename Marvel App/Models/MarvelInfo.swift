@@ -7,11 +7,21 @@
 //
 
 import Foundation
-
-//typealias MarvelInfos = MarvelInfoData
+import CoreData
 
 struct MarvelInfo: Codable {
-    public var code: Int?
-    public var status: String?
-    public var data: MarvelData?
+    var code: Int?
+    var status: String?
+    var data: MarvelData?
+
+    enum CodingKeys: String, CodingKey { case code, status, data }
+
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        code = try values.decode(Int.self, forKey: .code)
+        status = try values.decode(String.self, forKey: .status)
+        data = try values.decode(MarvelData.self, forKey: .data)
+    }
+
+    func encode(to encoder: Encoder) throws { }
 }

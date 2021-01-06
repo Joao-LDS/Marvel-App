@@ -1,41 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="18G103" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Hero" representedClassName=".Hero" syncable="YES">
-        <attribute name="desc" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="thumbnail" optional="YES" attributeType="Transformable"/>
-        <attribute name="urls" optional="YES" attributeType="Transformable"/>
-        <relationship name="thumb" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HeroThumbnail"/>
-        <relationship name="url" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MarvelURL"/>
+        <attribute name="description" attributeType="String"/>
+        <attribute name="image" optional="YES" attributeType="Transformable"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="urlThumbnail" attributeType="String"/>
+        <relationship name="urls" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Urls" inverseName="hero" inverseEntity="Urls"/>
     </entity>
-    <entity name="HeroThumbnail" representedClassName=".HeroThumbnail" syncable="YES">
-        <attribute name="extension" optional="YES" attributeType="String"/>
-        <attribute name="path" optional="YES" attributeType="String"/>
-    </entity>
-    <entity name="MarvelData" representedClassName=".MarvelData" syncable="YES">
-        <attribute name="count" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="limit" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="offset" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="results" optional="YES" attributeType="Transformable"/>
-        <attribute name="total" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="heroes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Hero"/>
-    </entity>
-    <entity name="MarvelInfo" representedClassName=".MarvelInfo" syncable="YES">
-        <attribute name="code" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="data" optional="YES" attributeType="Transformable"/>
-        <attribute name="status" optional="YES" attributeType="String"/>
-        <relationship name="marveldata" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MarvelData"/>
-    </entity>
-    <entity name="MarvelURL" representedClassName=".MarvelURL" syncable="YES">
+    <entity name="Urls" representedClassName="Urls" syncable="YES">
         <attribute name="type" optional="YES" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="String"/>
+        <relationship name="hero" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Hero" inverseName="urls" inverseEntity="Hero"/>
     </entity>
     <elements>
-        <element name="Hero" positionX="-312.27734375" positionY="-228.59375" width="128" height="148"/>
-        <element name="HeroThumbnail" positionX="-118.28125" positionY="-282.109375" width="128" height="73"/>
-        <element name="MarvelData" positionX="-226.01171875" positionY="67.1796875" width="128" height="133"/>
-        <element name="MarvelInfo" positionX="-52.015625" positionY="17.05078125" width="128" height="103"/>
-        <element name="MarvelURL" positionX="-76.89453125" positionY="-92.81640625" width="128" height="73"/>
+        <element name="Hero" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Urls" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

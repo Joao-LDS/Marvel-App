@@ -1,4 +1,0 @@
-github "freshOS/Stevia" == 4.7.2
-github "Alamofire/Alamofire" ~> 5.2
-github "onevcat/Kingfisher" ~> 5.0
-github "onmyway133/SwiftHash"

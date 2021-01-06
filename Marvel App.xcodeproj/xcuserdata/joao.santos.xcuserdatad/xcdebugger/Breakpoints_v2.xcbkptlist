@@ -71,102 +71,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "827D4583-0FAE-469D-A072-2D0495D344A1"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Marvel App/ViewModel/MainViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "MainViewModel"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "9068B43E-AB41-47F3-A372-D19F6E44F095"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Marvel App/ViewModel/MainViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "fetchHeroes(newRequest:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "FC4F94C9-91BD-4DAD-B586-24F212C36689"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Marvel App/ViewModel/MainViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "fetchHeroes(newRequest:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "FC4F94C9-91BD-4DAD-B586-24F212C36689 - 4d48efaa910a2b65"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Marvel_App.MainViewModel.fetchHeroes(newRequest: Swift.Bool) -&gt; ()"
-                  moduleName = "Marvel App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/joao.santos/Documents/Projects/Marvel%20App/Marvel%20App/ViewModel/MainViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "25"
-                  endingLineNumber = "25"
-                  offsetFromSymbolStart = "34">
-               </Location>
-               <Location
-                  uuid = "FC4F94C9-91BD-4DAD-B586-24F212C36689 - bbaea04a0c05626f"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Marvel_App.MarvelInfoData&gt;) -&gt; () in Marvel_App.MainViewModel.fetchHeroes(newRequest: Swift.Bool) -&gt; ()"
-                  moduleName = "Marvel App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/joao.santos/Documents/Projects/Marvel%20App/Marvel%20App/ViewModel/MainViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "26"
-                  endingLineNumber = "26"
-                  offsetFromSymbolStart = "170">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "44FE16F9-714A-4C88-9E65-B0CC8158F68F"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Marvel App/View/HeroCustomCell.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "configureCell(hero:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "78E89911-1B0D-4DF3-884F-75C126FEFBEC"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -222,8 +126,8 @@
             filePath = "Marvel App/Service/MarvelAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "request(name:page:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -238,8 +142,8 @@
             filePath = "Marvel App/Service/MarvelAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
             landmarkName = "request(name:page:completion:)"
             landmarkType = "7">
             <Locations>
@@ -286,8 +190,8 @@
             filePath = "Marvel App/Service/MarvelAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
             landmarkName = "request(name:page:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -295,16 +199,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "20F29791-AA58-45F8-BDB0-F11F39347471"
+            uuid = "4699233B-5D77-42D3-8020-E2288C630BC0"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Marvel App/ViewModel/MainViewModel.swift"
+            filePath = "Marvel App/View/HeroCustomCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "fetchHeroes(newRequest:)"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "configureCell(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EE33CB78-F93F-489B-B464-84F0C35E2E64"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Marvel App/View/MainViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "favoriteButtonTapped()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
