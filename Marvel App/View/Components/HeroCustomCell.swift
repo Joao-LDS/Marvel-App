@@ -15,24 +15,18 @@ class HeroCustomCell: UICollectionViewCell {
     
     lazy var imageView: UIImageView = {
         let view = UIImageView()
-        view.layer.cornerRadius = 25
-        view.layer.masksToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     lazy var namelabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Marvel-Regular", size: 38)
-        label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     lazy var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
-        view.layer.cornerRadius = 25
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -51,12 +45,14 @@ class HeroCustomCell: UICollectionViewCell {
     // MARK: - Methods
     
     func configureCell(_ hero: Hero) {
-        guard let thumbnail = hero.thumbnail?.url else { return }
-        let url = URL(string: thumbnail)
         namelabel.text = hero.name!.uppercased()
-        imageView.kf.setImage(with: url)
-        imageView.kf.indicatorType = .activity
-        
+        if let data = hero.image, let image = UIImage(data: data) {
+            imageView.image = image
+        } else if let thumbnail = hero.thumbnail?.url {
+            let url = URL(string: thumbnail)
+            imageView.kf.setImage(with: url)
+            imageView.kf.indicatorType = .activity
+        }
     }
     
 }
@@ -90,7 +86,15 @@ extension HeroCustomCell: ConfigureView {
     
     func additionalConfiguration() {
         
-        imageView.contentMode = .scaleAspectFill
+//        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 25
+        imageView.layer.masksToBounds = true
+        
+        namelabel.font = UIFont(name: "Marvel-Regular", size: 38)
+        namelabel.textColor = .white
+        
+        containerView.backgroundColor = .white
+        containerView.layer.cornerRadius = 25
         
     }
 }

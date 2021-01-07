@@ -9,6 +9,15 @@
 import Foundation
 import CoreData
 
-class FavoriteListViewModel: NSObject, NSFetchedResultsControllerDelegate {
+class FavoriteListViewModel {
     
+    let herosObject: [HeroObject]?
+    
+    init(herosObject: [HeroObject]?) {
+        self.herosObject = herosObject
+    }
+    
+    func convertHeroObjectToHero() {
+        
+    }
 }

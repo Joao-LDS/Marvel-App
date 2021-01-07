@@ -7,11 +7,11 @@
 //
 
 import Foundation
-import UIKit
 import CoreData
 
-class DetailViewModel: NSObject {
+class DetailViewModel {
     
+    let coreDataStack = CoreDataStack.shared
     var hero: Hero!
     var urls: [Urls]? {
         return self.hero.urls
@@ -21,6 +21,23 @@ class DetailViewModel: NSObject {
         self.hero = hero
     }
     
+    func saveHero(image: Data) {
+        let heroObject = HeroObject(entity: coreDataStack.entity, insertInto: coreDataStack.context)
+        heroObject.name = hero.name
+        heroObject.desc = hero.desc
+        heroObject.image = image
+        guard let urls = urls else { return }
+        var urlsObjectArray: [UrlsObject] = []
+        for url in urls {
+            let urlObject = UrlsObject(context: coreDataStack.context)
+            urlObject.type = url.type
+            urlObject.url = url.url
+            urlsObjectArray.append(urlObject)
+        }
+        heroObject.urls = NSSet(array: urlsObjectArray)
+        
+        coreDataStack.save()
+    }
     
     func getUrlFromMarvelURL(index: Int) -> URL? {
         guard let urls = urls else { return nil }

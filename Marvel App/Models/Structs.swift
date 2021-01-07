@@ -28,6 +28,7 @@ struct Hero: Codable {
     public var desc: String?
     public var thumbnail: Thumbnail?
     public var urls: [Urls]?
+    public var image: Data?
     
     enum CodingKeys: String, CodingKey {
         case id = "id"

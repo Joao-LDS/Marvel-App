@@ -12,8 +12,8 @@ class MainView: UIView {
 
     // MARK: - Properties
     
-    lazy var searchButton: UIButton = {
-        let view = UIButton(type: .system)
+    lazy var searchButton: FloatButton = {
+        let view = FloatButton()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -28,20 +28,12 @@ class MainView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        
-        
         collection.translatesAutoresizingMaskIntoConstraints = false
         return collection
     }()
     
-    lazy var imageFavoriteButton: UIImageView = {
-        let view = UIImageView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    lazy var favoriteButton: UIButton = {
-        let button = UIButton()
+    lazy var favoriteButton: FloatButton = {
+        let button = FloatButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -63,16 +55,13 @@ extension MainView: ConfigureView {
         addSubview(searchButton)
         addSubview(searchTextField)
         addSubview(collection)
-        addSubview(imageFavoriteButton)
         addSubview(favoriteButton)
     }
     
     func addConstraints() {
         NSLayoutConstraint.activate([
             searchButton.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: 16),
-            searchButton.leadingAnchor.constraint(equalTo: searchTextField.trailingAnchor, constant: 16),
             searchButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            searchButton.heightAnchor.constraint(equalToConstant: 50),
             
             searchTextField.heightAnchor.constraint(equalToConstant: 50),
             searchTextField.trailingAnchor.constraint(equalTo: searchButton.leadingAnchor, constant: -16),
@@ -85,34 +74,27 @@ extension MainView: ConfigureView {
             collection.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             favoriteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -18),
-            favoriteButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30),
-            favoriteButton.widthAnchor.constraint(equalToConstant: 55),
-            favoriteButton.heightAnchor.constraint(equalToConstant: 55),
-            
-            imageFavoriteButton.widthAnchor.constraint(equalToConstant: 25),
-            imageFavoriteButton.heightAnchor.constraint(equalToConstant: 25),
-            imageFavoriteButton.centerYAnchor.constraint(equalTo: favoriteButton.centerYAnchor),
-            imageFavoriteButton.centerXAnchor.constraint(equalTo: favoriteButton.centerXAnchor)
+            favoriteButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30)
         ])
     }
     
     func additionalConfiguration() {
         backgroundColor = .red
         
-        searchButton.setTitle("Buscar", for: .normal)
+        searchButton.imageview.image = #imageLiteral(resourceName: "search")
         
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 0))
+        searchTextField.leftView = paddingView
+        searchTextField.leftViewMode = .always
+        searchTextField.textColor = .red
+        searchTextField.font = UIFont(name: "Marvel-Regular", size: 24)
+        searchTextField.autocapitalizationType = .allCharacters
         searchTextField.backgroundColor = .white
         searchTextField.layer.cornerRadius = 20
         
         collection.backgroundColor = .clear
         
-        imageFavoriteButton.image = #imageLiteral(resourceName: "add-to-favorites")
+        favoriteButton.imageview.image = #imageLiteral(resourceName: "favorite")
         
-        favoriteButton.backgroundColor = .red
-        favoriteButton.layer.cornerRadius = 28
-        favoriteButton.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        favoriteButton.layer.shadowOffset = .zero
-        favoriteButton.layer.shadowRadius = 8
-        favoriteButton.layer.shadowOpacity = 0.5
     }
 }

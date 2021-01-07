@@ -30,7 +30,6 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
-//        searchBar.delegate = self
         addToolbarKeyboard()
         configureView()
     }
@@ -43,6 +42,7 @@ class MainViewController: UIViewController {
     
     func configureView() {
         uiview.searchButton.addTarget(self, action: #selector(self.searchButtonPressed), for: .touchUpInside)
+        uiview.favoriteButton.addTarget(self, action: #selector(self.favoriteButtonPressed), for: .touchUpInside)
         setupCollectionView()
     }
     
@@ -57,7 +57,6 @@ class MainViewController: UIViewController {
         let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let cancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissKeyboard))
         toolbar.setItems([flexible, cancel], animated: true)
-//        searchBar.inputAccessoryView = toolbar
     }
     
     // MARK: - Selectors
@@ -67,22 +66,17 @@ class MainViewController: UIViewController {
         viewModel.fetchHeroes(heroName: heroName, newRequest: true)
     }
     
-//    @objc func handleSearch() {
-////        searchBar.resignFirstResponder()
-//        guard let name = uiview.searchTextField.text else { return }
-//        viewModel.currentPage = 0
-//        viewModel.fetchHeroes(newRequest: true)
-//        uiview.collection.setContentOffset(.zero, animated: true) // scroll collection to top
-//    }
-
+    @objc func favoriteButtonPressed() {
+        let heros = viewModel.fetchHerosObjectFromCoraData()
+        let viewModel = FavoriteListViewModel(herosObject: heros)
+        let controller = FavoriteListViewController(viewModel: viewModel)
+        present(controller, animated: true)
+    }
+    
     @objc func dismissKeyboard() {
 //        searchBar.resignFirstResponder()
     }
     
-    @objc func favoriteButtonTapped() {
-        let vc = FavoriteListViewController()
-        present(vc, animated: true, completion: nil)
-    }
 }
 
 // MARK: - MainViewModelDelegate
@@ -93,22 +87,12 @@ extension MainViewController: MainViewModelDelegate {
     }
 }
 
-// MARK: - UISearchBarDelegate
-
-extension MainViewController: UISearchBarDelegate {
-    // Active button search by keyboard
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        handleSearch()
-//        searchBar.resignFirstResponder()
-    }
-}
-
 // MARK: - UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
 
 extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height * 0.75)
+        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height * 0.65)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -126,7 +110,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
         let hero = viewModel.heroes[indexPath.row]
         let viewModel = DetailViewModel(hero: hero)
         let vc = DetailViewController(viewModel: viewModel)
-//        vc.modalPresentationStyle = .fullScreen
+        vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }
     

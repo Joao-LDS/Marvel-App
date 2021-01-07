@@ -30,8 +30,16 @@
 		E857DDBE2507BC070053CAEB /* FavoriteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857DDBD2507BC070053CAEB /* FavoriteListViewController.swift */; };
 		E857DDC02507E48E0053CAEB /* ViewController+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857DDBF2507E48E0053CAEB /* ViewController+CoreData.swift */; };
 		E857DDC22507F13A0053CAEB /* FavoriteListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857DDC12507F13A0053CAEB /* FavoriteListViewModel.swift */; };
-		E85E414824EDA03100F65826 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85E414724EDA03100F65826 /* WebViewViewController.swift */; };
+		E85E414824EDA03100F65826 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85E414724EDA03100F65826 /* WebViewController.swift */; };
+		E88AFC8325A75A67009EA1AA /* FavoriteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88AFC8225A75A67009EA1AA /* FavoriteListView.swift */; };
+		E88AFC8925A76831009EA1AA /* main.png in Resources */ = {isa = PBXBuildFile; fileRef = E88AFC8625A76831009EA1AA /* main.png */; };
+		E88AFC8A25A76831009EA1AA /* webview.png in Resources */ = {isa = PBXBuildFile; fileRef = E88AFC8725A76831009EA1AA /* webview.png */; };
+		E88AFC8B25A76831009EA1AA /* detail.png in Resources */ = {isa = PBXBuildFile; fileRef = E88AFC8825A76831009EA1AA /* detail.png */; };
 		E8B3344E25A63F33000BF896 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B3344D25A63F33000BF896 /* DetailView.swift */; };
+		E8E0E5BB25A7371D00A9E0BB /* FloatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E0E5BA25A7371D00A9E0BB /* FloatButton.swift */; };
+		E8E0E5BD25A73DC700A9E0BB /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E0E5BC25A73DC700A9E0BB /* WebView.swift */; };
+		E8E0E5BF25A73DE900A9E0BB /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E0E5BE25A73DE900A9E0BB /* WebViewModel.swift */; };
+		E8E0E5C125A7436500A9E0BB /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E0E5C025A7436500A9E0BB /* CoreDataStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,8 +99,16 @@
 		E857DDBD2507BC070053CAEB /* FavoriteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoriteListViewController.swift; path = "../New Group2/FavoriteListViewController.swift"; sourceTree = "<group>"; };
 		E857DDBF2507E48E0053CAEB /* ViewController+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+CoreData.swift"; sourceTree = "<group>"; };
 		E857DDC12507F13A0053CAEB /* FavoriteListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListViewModel.swift; sourceTree = "<group>"; };
-		E85E414724EDA03100F65826 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WebViewViewController.swift; path = "../New Group1/WebViewViewController.swift"; sourceTree = "<group>"; };
+		E85E414724EDA03100F65826 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WebViewController.swift; path = "../New Group1/WebViewController.swift"; sourceTree = "<group>"; };
+		E88AFC8225A75A67009EA1AA /* FavoriteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListView.swift; sourceTree = "<group>"; };
+		E88AFC8625A76831009EA1AA /* main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main.png; sourceTree = "<group>"; };
+		E88AFC8725A76831009EA1AA /* webview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = webview.png; sourceTree = "<group>"; };
+		E88AFC8825A76831009EA1AA /* detail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detail.png; sourceTree = "<group>"; };
 		E8B3344D25A63F33000BF896 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		E8E0E5BA25A7371D00A9E0BB /* FloatButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatButton.swift; sourceTree = "<group>"; };
+		E8E0E5BC25A73DC700A9E0BB /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		E8E0E5BE25A73DE900A9E0BB /* WebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
+		E8E0E5C025A7436500A9E0BB /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +157,7 @@
 			children = (
 				E8465AA724DB324600581FC8 /* HeroCustomCell.swift */,
 				E8073FC424F6CECF0024D6B2 /* UrlButton.swift */,
+				E8E0E5BA25A7371D00A9E0BB /* FloatButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -158,6 +175,7 @@
 		E8465A9024DAD99D00581FC8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E88AFC8425A767E6009EA1AA /* CoreData */,
 				E835EB7E250BE4240011001B /* Structs.swift */,
 			);
 			path = Models;
@@ -174,6 +192,7 @@
 		E8465AA524DB228D00581FC8 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				E88AFC8525A76806009EA1AA /* Screenshots */,
 				E8556DAA24F3F6A400B06DEF /* Fonts */,
 				E84964E424DA2422003F4A2C /* AppDelegate.swift */,
 				E84964F024DA2423003F4A2C /* Assets.xcassets */,
@@ -279,6 +298,24 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		E88AFC8425A767E6009EA1AA /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				E8E0E5C025A7436500A9E0BB /* CoreDataStack.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		E88AFC8525A76806009EA1AA /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				E88AFC8825A76831009EA1AA /* detail.png */,
+				E88AFC8625A76831009EA1AA /* main.png */,
+				E88AFC8725A76831009EA1AA /* webview.png */,
+			);
+			path = Screenshots;
+			sourceTree = "<group>";
+		};
 		E8B3344A25A63EEF000BF896 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -292,7 +329,9 @@
 		E8B3344B25A63EFC000BF896 /* WebView */ = {
 			isa = PBXGroup;
 			children = (
-				E85E414724EDA03100F65826 /* WebViewViewController.swift */,
+				E85E414724EDA03100F65826 /* WebViewController.swift */,
+				E8E0E5BC25A73DC700A9E0BB /* WebView.swift */,
+				E8E0E5BE25A73DE900A9E0BB /* WebViewModel.swift */,
 			);
 			path = WebView;
 			sourceTree = "<group>";
@@ -302,6 +341,7 @@
 			children = (
 				E857DDBD2507BC070053CAEB /* FavoriteListViewController.swift */,
 				E857DDC12507F13A0053CAEB /* FavoriteListViewModel.swift */,
+				E88AFC8225A75A67009EA1AA /* FavoriteListView.swift */,
 			);
 			path = Favorite;
 			sourceTree = "<group>";
@@ -415,8 +455,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E88AFC8925A76831009EA1AA /* main.png in Resources */,
 				E84964F424DA2423003F4A2C /* LaunchScreen.storyboard in Resources */,
+				E88AFC8B25A76831009EA1AA /* detail.png in Resources */,
 				E8556DAC24F3F71800B06DEF /* MarvelRegular.ttf in Resources */,
+				E88AFC8A25A76831009EA1AA /* webview.png in Resources */,
 				E84964F124DA2423003F4A2C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -545,21 +588,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8E0E5C125A7436500A9E0BB /* CoreDataStack.swift in Sources */,
 				E84964E924DA2422003F4A2C /* MainViewController.swift in Sources */,
 				E8465AB024DB4F7D00581FC8 /* ConfigureView.swift in Sources */,
 				E8B3344E25A63F33000BF896 /* DetailView.swift in Sources */,
+				E8E0E5BF25A73DE900A9E0BB /* WebViewModel.swift in Sources */,
 				E8465AAD24DB4F1600581FC8 /* DetailViewController.swift in Sources */,
 				E84964E524DA2422003F4A2C /* AppDelegate.swift in Sources */,
 				E84964EF24DA2422003F4A2C /* Marvel_App.xcdatamodeld in Sources */,
 				E857DDBE2507BC070053CAEB /* FavoriteListViewController.swift in Sources */,
 				E8465A9C24DADD7F00581FC8 /* MarvelAPI.swift in Sources */,
+				E88AFC8325A75A67009EA1AA /* FavoriteListView.swift in Sources */,
 				E8465AA824DB324600581FC8 /* HeroCustomCell.swift in Sources */,
 				E835EB7F250BE4240011001B /* Structs.swift in Sources */,
 				E857DDC22507F13A0053CAEB /* FavoriteListViewModel.swift in Sources */,
 				E836B1A525A3B56800662E10 /* MainView.swift in Sources */,
+				E8E0E5BB25A7371D00A9E0BB /* FloatButton.swift in Sources */,
+				E8E0E5BD25A73DC700A9E0BB /* WebView.swift in Sources */,
 				E8073FC524F6CECF0024D6B2 /* UrlButton.swift in Sources */,
 				E8465AB224DB512B00581FC8 /* DetailViewModel.swift in Sources */,
-				E85E414824EDA03100F65826 /* WebViewViewController.swift in Sources */,
+				E85E414824EDA03100F65826 /* WebViewController.swift in Sources */,
 				E8465AAB24DB3BA600581FC8 /* MainViewModel.swift in Sources */,
 				E857DDC02507E48E0053CAEB /* ViewController+CoreData.swift in Sources */,
 			);

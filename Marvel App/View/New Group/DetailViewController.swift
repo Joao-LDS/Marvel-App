@@ -45,6 +45,8 @@ class DetailViewController: UIViewController {
     func configureView() {
         uiview.closeButton.addTarget(self, action: #selector(self.closeButtonTapped), for: .touchUpInside)
         
+        uiview.favoriteButton.addTarget(self, action: #selector(self.favoriteButtonTapped), for: .touchUpInside)
+        
         let url = viewModel.hero.thumbnail?.url
         uiview.imageView.kf.setImage(with: URL(string: url!))
         
@@ -69,7 +71,8 @@ class DetailViewController: UIViewController {
         guard let index = uiview.stackView.arrangedSubviews.firstIndex(of: sender) else { return }
         guard let url = viewModel.getUrlFromMarvelURL(index: index) else { return }
         let request = URLRequest(url: url)
-        let webView = WebViewViewController(request)
+        let viewModel = WebViewModel(request: request)
+        let webView = WebViewController(viewModel: viewModel)
         present(webView, animated: true, completion: nil)
     }
     
@@ -78,6 +81,8 @@ class DetailViewController: UIViewController {
     }
     
     @objc func favoriteButtonTapped() {
-//        let image = imageView.image
+        let image = uiview.imageView.image
+        let data = image?.jpegData(compressionQuality: 1.0)
+        viewModel.saveHero(image: data!)
     }
 }

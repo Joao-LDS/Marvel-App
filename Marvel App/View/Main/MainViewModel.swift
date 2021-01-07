@@ -14,6 +14,7 @@ protocol MainViewModelDelegate {
 
 class MainViewModel {
     
+    let coreDataStack = CoreDataStack.shared
     var heroes: [Hero] = []
     var delegate: MainViewModelDelegate?
     lazy var service = MarvelAPI()
@@ -49,6 +50,10 @@ class MainViewModel {
             currentPage += 1
             fetchHeroes(heroName: nil, newRequest: false)
         }
+    }
+    
+    func fetchHerosObjectFromCoraData() -> [HeroObject]? {
+        return coreDataStack.fetchObjectHero()
     }
     
 }

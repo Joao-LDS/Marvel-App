@@ -34,14 +34,8 @@ class DetailView: UIView {
         return view
     }()
     
-    lazy var imageCloseButton: UIImageView = {
-        let view = UIImageView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    lazy var closeButton: UIButton = {
-        let button = UIButton(type: .system)
+    lazy var closeButton: FloatButton = {
+        let button = FloatButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -54,14 +48,8 @@ class DetailView: UIView {
         return view
     }()
     
-    lazy var imageFavoriteButton: UIImageView = {
-        let view = UIImageView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    lazy var favoriteButton: UIButton = {
-        let button = UIButton()
+    lazy var favoriteButton: FloatButton = {
+        let button = FloatButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -101,8 +89,6 @@ class DetailView: UIView {
 extension DetailView: ConfigureView {
     func addView() {
         addSubview(scrollView)
-        closeButton.addSubview(imageCloseButton)
-        favoriteButton.addSubview(imageFavoriteButton)
         scrollView.addSubview(imageView)
         scrollView.addSubview(closeButton)
         scrollView.addSubview(favoriteButton)
@@ -113,30 +99,16 @@ extension DetailView: ConfigureView {
     
     func addConstraints() {
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: topAnchor),
+            scrollView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
             scrollView.leftAnchor.constraint(equalTo: leftAnchor),
             scrollView.rightAnchor.constraint(equalTo: rightAnchor),
             scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             favoriteButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 18),
             favoriteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -18),
-            favoriteButton.widthAnchor.constraint(equalToConstant: 45),
-            favoriteButton.heightAnchor.constraint(equalToConstant: 45),
-            
-            imageFavoriteButton.widthAnchor.constraint(equalToConstant: 25),
-            imageFavoriteButton.heightAnchor.constraint(equalToConstant: 25),
-            imageFavoriteButton.centerYAnchor.constraint(equalTo: favoriteButton.centerYAnchor),
-            imageFavoriteButton.centerXAnchor.constraint(equalTo: favoriteButton.centerXAnchor),
             
             closeButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 18),
             closeButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 18),
-            closeButton.widthAnchor.constraint(equalToConstant: 45),
-            closeButton.heightAnchor.constraint(equalToConstant: 45),
-            
-            imageCloseButton.widthAnchor.constraint(equalToConstant: 25),
-            imageCloseButton.heightAnchor.constraint(equalToConstant: 25),
-            imageCloseButton.centerYAnchor.constraint(equalTo: closeButton.centerYAnchor),
-            imageCloseButton.centerXAnchor.constraint(equalTo: closeButton.centerXAnchor),
             
             imageView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -161,10 +133,7 @@ extension DetailView: ConfigureView {
     func additionalConfiguration() {
         backgroundColor = .red
         
-        imageCloseButton.image = #imageLiteral(resourceName: "close-icon-left")
-        
-        closeButton.backgroundColor = .red
-        closeButton.layer.cornerRadius = 25
+        closeButton.imageview.image = #imageLiteral(resourceName: "arrowLeft")
         
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
@@ -182,10 +151,7 @@ extension DetailView: ConfigureView {
         stackView.distribution = .fillEqually
         stackView.spacing = 8
         
-        imageFavoriteButton.image = #imageLiteral(resourceName: "add-to-favorites")
-        
-        favoriteButton.backgroundColor = .red
-        favoriteButton.layer.cornerRadius = 25
+        favoriteButton.imageview.image = #imageLiteral(resourceName: "favorite")
     }
     
 }
