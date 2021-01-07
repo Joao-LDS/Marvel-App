@@ -47,13 +47,20 @@ class DetailViewController: UIViewController {
         
         uiview.favoriteButton.addTarget(self, action: #selector(self.favoriteButtonTapped), for: .touchUpInside)
         
-        let url = viewModel.hero.thumbnail?.url
-        uiview.imageView.kf.setImage(with: URL(string: url!))
+        let hero = viewModel.hero
         
-        let name = viewModel.hero.name
+        if let data = hero.image, let image = UIImage(data: data) {
+            uiview.imageView.image = image
+        } else if let thumbnail = hero.thumbnail?.url {
+            let url = URL(string: thumbnail)
+            uiview.imageView.kf.setImage(with: url)
+            uiview.imageView.kf.indicatorType = .activity
+        }
+        
+        let name = hero.name
         uiview.nameLabel.text = name?.uppercased()
         
-        let description = viewModel.hero.desc
+        let description = hero.desc
         uiview.descriptionLabel.text = description?.uppercased()
         
         let types = viewModel.getTitlesURL()
@@ -84,5 +91,6 @@ class DetailViewController: UIViewController {
         let image = uiview.imageView.image
         let data = image?.jpegData(compressionQuality: 1.0)
         viewModel.saveHero(image: data!)
+        dismiss(animated: true)
     }
 }

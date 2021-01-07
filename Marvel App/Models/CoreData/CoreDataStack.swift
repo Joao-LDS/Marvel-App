@@ -36,14 +36,6 @@ class CoreDataStack {
     func save() {
         do {
             try context.save()
-            let heros = fetchObjectHero()
-            for hero in heros! {
-                print(hero.name)
-                for url in hero.urls!.allObjects as! [UrlsObject] {
-                    print(url.url)
-                    print(url.type)
-                }
-            }
         } catch {
             print("DEBUG: CoreData Error - \(error.localizedDescription)")
         }
@@ -63,4 +55,5 @@ class CoreDataStack {
             return nil
         }
     }
+    
 }

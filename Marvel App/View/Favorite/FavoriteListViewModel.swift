@@ -17,7 +17,19 @@ class FavoriteListViewModel {
         self.herosObject = herosObject
     }
     
-    func convertHeroObjectToHero() {
-        
+    func convertHeroObjectToHero(index: Int) -> Hero {
+        let heroObject = herosObject![index]
+        var hero = Hero()
+        hero.name = heroObject.name
+        hero.desc = heroObject.desc
+        hero.image = heroObject.image
+        let urls = heroObject.urls!
+        var urlsArray: [Urls] = []
+        for url in urls.allObjects as! [UrlsObject] {
+            let urlsHero = Urls(type: url.type, url: url.url)
+            urlsArray.append(urlsHero)
+        }
+        hero.urls = urlsArray
+        return hero
     }
 }

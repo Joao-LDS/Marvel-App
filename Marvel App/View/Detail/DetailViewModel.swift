@@ -12,7 +12,7 @@ import CoreData
 class DetailViewModel {
     
     let coreDataStack = CoreDataStack.shared
-    var hero: Hero!
+    var hero: Hero
     var urls: [Urls]? {
         return self.hero.urls
     }

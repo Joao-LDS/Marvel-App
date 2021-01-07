@@ -43,7 +43,7 @@ extension FavoriteListView: ConfigureView {
     
     func addConstraints() {
         NSLayoutConstraint.activate([
-            collection.topAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor),
+            collection.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 10),
             collection.leadingAnchor.constraint(equalTo: leadingAnchor),
             collection.trailingAnchor.constraint(equalTo: trailingAnchor),
             collection.bottomAnchor.constraint(equalTo: bottomAnchor),
