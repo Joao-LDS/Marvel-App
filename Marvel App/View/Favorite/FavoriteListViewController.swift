@@ -70,6 +70,7 @@ extension FavoriteListViewController: UICollectionViewDelegateFlowLayout, UIColl
         let hero = viewModel.convertHeroObjectToHero(index: indexPath.row)
         let viewModel = DetailViewModel(hero: hero)
         let controller = DetailViewController(viewModel: viewModel)
+        controller.uiview.favoriteButton.isHidden = true
         present(controller, animated: true)
     }
     
