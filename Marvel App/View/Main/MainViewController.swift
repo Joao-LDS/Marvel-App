@@ -30,7 +30,6 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
-        addToolbarKeyboard()
         configureView()
     }
     
@@ -44,6 +43,12 @@ class MainViewController: UIViewController {
         uiview.searchButton.addTarget(self, action: #selector(self.searchButtonPressed), for: .touchUpInside)
         uiview.favoriteButton.addTarget(self, action: #selector(self.favoriteButtonPressed), for: .touchUpInside)
         setupCollectionView()
+        
+        uiview.searchTextField.delegate = self
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        uiview.collection.addGestureRecognizer(tap)
     }
     
     func setupCollectionView() {
@@ -52,18 +57,12 @@ class MainViewController: UIViewController {
         uiview.collection.register(HeroCustomCell.self, forCellWithReuseIdentifier: "cell")
     }
     
-    func addToolbarKeyboard() {
-        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
-        let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissKeyboard))
-        toolbar.setItems([flexible, cancel], animated: true)
-    }
-    
     // MARK: - Selectors
     
     @objc func searchButtonPressed() {
         guard let heroName = uiview.searchTextField.text else { return }
         viewModel.fetchHeroes(heroName: heroName, newRequest: true)
+        dismissKeyboard()
     }
     
     @objc func favoriteButtonPressed() {
@@ -74,9 +73,19 @@ class MainViewController: UIViewController {
     }
     
     @objc func dismissKeyboard() {
-//        searchBar.resignFirstResponder()
+        view.endEditing(true)
     }
     
+}
+
+// MARK: - MainViewModelDelegate
+
+extension MainViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        dismissKeyboard()
+        searchButtonPressed()
+        return true
+    }
 }
 
 // MARK: - MainViewModelDelegate
