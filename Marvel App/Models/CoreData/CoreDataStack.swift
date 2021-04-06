@@ -12,7 +12,6 @@ import CoreData
 class CoreDataStack {
     
     static let shared = CoreDataStack()
-    var fetchedResultControllerHeroObject: NSFetchedResultsController<HeroObject>?
         
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Marvel_App")
@@ -45,7 +44,7 @@ class CoreDataStack {
         let sort = NSSortDescriptor(key: "name", ascending: true)
         let request: NSFetchRequest<HeroObject> = HeroObject.fetchRequest()
         request.sortDescriptors = [sort]
-        fetchedResultControllerHeroObject = NSFetchedResultsController(fetchRequest: request, managedObjectContext: self.context, sectionNameKeyPath: nil, cacheName: nil)
+        let fetchedResultControllerHeroObject: NSFetchedResultsController<HeroObject>? = NSFetchedResultsController(fetchRequest: request, managedObjectContext: self.context, sectionNameKeyPath: nil, cacheName: nil)
 
         do {
             try fetchedResultControllerHeroObject?.performFetch()
@@ -53,6 +52,28 @@ class CoreDataStack {
         } catch {
             print(error.localizedDescription)
             return nil
+        }
+    }
+    
+    func heroDidSaved(_ name: String) -> Bool {
+        let predicate = NSPredicate(format: "name == %@", name)
+        let sort = NSSortDescriptor(key: "name", ascending: true)
+        let request: NSFetchRequest<HeroObject> = HeroObject.fetchRequest()
+        request.predicate = predicate
+        request.sortDescriptors = [sort]
+        let fetchedResult: NSFetchedResultsController<HeroObject>? = NSFetchedResultsController(fetchRequest: request, managedObjectContext: self.context, sectionNameKeyPath: nil, cacheName: nil)
+        
+        
+        do {
+            try fetchedResult?.performFetch()
+            if fetchedResult?.fetchedObjects?.count != 0 {
+                return true
+            } else {
+                return false
+            }
+        } catch {
+            print(error.localizedDescription)
+            return false
         }
     }
     

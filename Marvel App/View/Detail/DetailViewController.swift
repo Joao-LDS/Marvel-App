@@ -13,16 +13,17 @@ class DetailViewController: UIViewController {
     
     // MARK: - Properties
     
-    let viewModel: DetailViewModel
+    var viewModel: DetailViewModelProtocol
     var uiview: DetailView
     
     
     // MARK: - Init
     
-    init(viewModel: DetailViewModel) {
+    init(viewModel: DetailViewModelProtocol) {
         self.viewModel = viewModel
         uiview = DetailView()
         super.init(nibName: nil, bundle: nil)
+        bind()
     }
     
     required init?(coder: NSCoder) {
@@ -69,7 +70,16 @@ class DetailViewController: UIViewController {
         for button in uiview.urlButtons {
             button.addTarget(self, action: #selector(self.urlButtonTapped(_:)), for: .touchUpInside)
         }
-        
+    }
+    
+    func bind() {
+        self.viewModel.showAlert = { [unowned self] message in
+            let alert = CustomAlertViewController(message: message)
+            alert.delegate = self
+            alert.modalPresentationStyle = .overFullScreen
+            alert.modalTransitionStyle = .crossDissolve
+            self.show(alert, sender: nil)
+        }
     }
     
     // MARK: - Selectors
@@ -91,6 +101,11 @@ class DetailViewController: UIViewController {
         let image = uiview.imageView.image
         let data = image?.jpegData(compressionQuality: 1.0)
         viewModel.saveHero(image: data!)
-        dismiss(animated: true)
+    }
+}
+
+extension DetailViewController: CustomAlertViewButtonDelegate {
+    func buttonPressed() {
+        closeButtonTapped()
     }
 }

@@ -9,7 +9,16 @@
 import Foundation
 import CoreData
 
-class DetailViewModel {
+protocol DetailViewModelProtocol {
+    var hero: Hero { get set }
+    var showAlert: ((String) -> Void)? { get set }
+    func getTitlesURL() -> [String]
+    func getUrlFromMarvelURL(index: Int) -> URL?
+    func saveHero(image: Data)
+}
+
+class DetailViewModel: DetailViewModelProtocol {
+    var showAlert: ((String) -> Void)?
     
     let coreDataStack = CoreDataStack.shared
     var hero: Hero
@@ -22,21 +31,27 @@ class DetailViewModel {
     }
     
     func saveHero(image: Data) {
-        let heroObject = HeroObject(entity: coreDataStack.entity, insertInto: coreDataStack.context)
-        heroObject.name = hero.name
-        heroObject.desc = hero.desc
-        heroObject.image = image
-        guard let urls = urls else { return }
-        var urlsObjectArray: [UrlsObject] = []
-        for url in urls {
-            let urlObject = UrlsObject(context: coreDataStack.context)
-            urlObject.type = url.type
-            urlObject.url = url.url
-            urlsObjectArray.append(urlObject)
+        if coreDataStack.heroDidSaved(hero.name!) {
+            self.showAlert?("\(hero.name ?? "") foi salvo anteriormente.")
+        } else {
+            let heroObject = HeroObject(entity: coreDataStack.entity, insertInto: coreDataStack.context)
+            heroObject.name = hero.name
+            heroObject.desc = hero.desc
+            heroObject.image = image
+            guard let urls = urls else { return }
+            var urlsObjectArray: [UrlsObject] = []
+            for url in urls {
+                let urlObject = UrlsObject(context: coreDataStack.context)
+                urlObject.type = url.type
+                urlObject.url = url.url
+                urlsObjectArray.append(urlObject)
+            }
+            heroObject.urls = NSSet(array: urlsObjectArray)
+            
+            coreDataStack.save()
+            
+            self.showAlert?("\(hero.name ?? "") salvo com sucesso.")
         }
-        heroObject.urls = NSSet(array: urlsObjectArray)
-        
-        coreDataStack.save()
     }
     
     func getUrlFromMarvelURL(index: Int) -> URL? {
