@@ -6,11 +6,10 @@
 //  Copyright © 2020 João Luis Santos. All rights reserved.
 //
 
-
 import SwiftHash
 import UIKit
 
-class MarvelAPI {
+class MarvelRepository {
     
     private let basePath = "https://gateway.marvel.com/v1/public/characters?"
     private let privateKey = "833c93cf646d4326ffd8593ab545dab0b98537c6"
@@ -18,7 +17,6 @@ class MarvelAPI {
     /* Cada página da requisição vem com um número limitado de heróis,
     esse número é dado por limitHeroForRequest. */
     private let limitHeroForRequest = 40
-//    private let persistenceService = PersistenceService.shared
     
     private func parametersToAuthenticationApi() -> String {
         // Timestamp is a random number, must change on a request by request
@@ -29,7 +27,7 @@ class MarvelAPI {
         return parameters
     }
     
-    func request(name: String?, page: Int = 0, completion: @escaping(Result<Data, Error>) -> Void) {
+    func request(name: String?, page: Int = 0, completion: @escaping(Result<JSON, Failure>) -> Void) {
         /* É o range de heróis que vão retornar no JSON. Por ex, na primeira request vem os 20 primeiros,
          na segunda os próximos 20, e assim por diante. */
         let offset = limitHeroForRequest * page
@@ -43,14 +41,20 @@ class MarvelAPI {
         }
         
         let url = URL(string: basePath + "offset=\(offset)&limit=\(limitHeroForRequest)&\(startsWith)&\(parametersToAuthenticationApi())")!
-        print(url)
+        
+        let failure = Failure(message: NSLocalizedString("Generic error", comment: ""))
         
         let session = URLSession.shared
-        let task = session.dataTask(with: url) { (data, _, error) in
-            if let error = error {
-                DispatchQueue.main.async { completion(.failure(error)) }
+        let task = session.dataTask(with: url) { (data, response, error) in
+            let response = response as? HTTPURLResponse
+            if error != nil || response?.statusCode != 200 {
+                DispatchQueue.main.async { completion(.failure(failure)) }
             } else if let data = data {
-                DispatchQueue.main.async { completion(.success(data)) }
+                guard let jsonObject = GenericDAO.getData(JSON.self, from: data) else {
+                    DispatchQueue.main.async { completion(.failure(failure)) }
+                    return
+                }
+                DispatchQueue.main.async { completion(.success(jsonObject)) }
             }
         }
         task.resume()

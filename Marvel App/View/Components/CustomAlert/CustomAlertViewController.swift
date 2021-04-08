@@ -21,6 +21,7 @@ class CustomAlertViewController: UIViewController {
         uiview = CustomAlertView()
         uiview.messageLabel.text = message.uppercased()
         super.init(nibName: nil, bundle: nil)
+        setupView()
     }
     
     required init?(coder: NSCoder) {
@@ -29,7 +30,6 @@ class CustomAlertViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
     }
     
     @objc func buttonPressed() {
@@ -50,6 +50,8 @@ extension CustomAlertViewController: ConfigureView {
     }
     
     func additionalConfiguration() {
+        modalPresentationStyle = .overFullScreen
+        modalTransitionStyle = .crossDissolve
         uiview.button.addTarget(self, action: #selector(self.buttonPressed), for: .touchUpInside)
         uiview.translatesAutoresizingMaskIntoConstraints = false
     }

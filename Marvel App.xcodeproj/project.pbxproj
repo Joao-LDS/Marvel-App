@@ -12,10 +12,13 @@
 		B4229F01CD323D745E6FAB30 /* Pods_Marvel_App_Marvel_AppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D76EEF5785EC536E5A4E2A /* Pods_Marvel_App_Marvel_AppUITests.framework */; };
 		CF219668261B8143006FBC4C /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF219667261B8143006FBC4C /* CustomAlertView.swift */; };
 		CF21966B261B8FA8006FBC4C /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF21966A261B8FA8006FBC4C /* CustomAlertViewController.swift */; };
+		CF3F649C261E747D00B49D5C /* GenericDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3F649B261E747D00B49D5C /* GenericDAO.swift */; };
+		CF3F649E261E77D800B49D5C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CF3F649D261E77D800B49D5C /* Localizable.strings */; };
+		CF3F64A0261E78F100B49D5C /* GenericStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3F649F261E78F100B49D5C /* GenericStructs.swift */; };
 		E8073FC524F6CECF0024D6B2 /* UrlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8073FC424F6CECF0024D6B2 /* UrlButton.swift */; };
 		E835EB7F250BE4240011001B /* Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E835EB7E250BE4240011001B /* Structs.swift */; };
 		E836B1A525A3B56800662E10 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E836B1A425A3B56800662E10 /* MainView.swift */; };
-		E8465A9C24DADD7F00581FC8 /* MarvelAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8465A9B24DADD7F00581FC8 /* MarvelAPI.swift */; };
+		E8465A9C24DADD7F00581FC8 /* MarvelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8465A9B24DADD7F00581FC8 /* MarvelRepository.swift */; };
 		E8465AA824DB324600581FC8 /* HeroCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8465AA724DB324600581FC8 /* HeroCustomCell.swift */; };
 		E8465AAB24DB3BA600581FC8 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8465AAA24DB3BA600581FC8 /* MainViewModel.swift */; };
 		E8465AAD24DB4F1600581FC8 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8465AAC24DB4F1600581FC8 /* DetailViewController.swift */; };
@@ -72,12 +75,15 @@
 		C9D68B6035E55940A786F25F /* Pods-Marvel App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Marvel App.release.xcconfig"; path = "Target Support Files/Pods-Marvel App/Pods-Marvel App.release.xcconfig"; sourceTree = "<group>"; };
 		CF219667261B8143006FBC4C /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		CF21966A261B8FA8006FBC4C /* CustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController.swift; sourceTree = "<group>"; };
+		CF3F649B261E747D00B49D5C /* GenericDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericDAO.swift; sourceTree = "<group>"; };
+		CF3F649D261E77D800B49D5C /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		CF3F649F261E78F100B49D5C /* GenericStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericStructs.swift; sourceTree = "<group>"; };
 		D9E8D3CEBC791C7EE0606901 /* Pods_Marvel_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Marvel_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8073FC424F6CECF0024D6B2 /* UrlButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlButton.swift; sourceTree = "<group>"; };
 		E835EB7E250BE4240011001B /* Structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structs.swift; sourceTree = "<group>"; };
 		E836B1A425A3B56800662E10 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		E8465A8C24DAD93C00581FC8 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
-		E8465A9B24DADD7F00581FC8 /* MarvelAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelAPI.swift; sourceTree = "<group>"; };
+		E8465A9B24DADD7F00581FC8 /* MarvelRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelRepository.swift; sourceTree = "<group>"; };
 		E8465A9D24DADF4300581FC8 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		E8465AA024DADF6C00581FC8 /* SwiftHash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftHash.framework; path = Carthage/Build/iOS/SwiftHash.framework; sourceTree = "<group>"; };
 		E8465AA724DB324600581FC8 /* HeroCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroCustomCell.swift; sourceTree = "<group>"; };
@@ -198,7 +204,7 @@
 		E8465A9A24DADD6400581FC8 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				E8465A9B24DADD7F00581FC8 /* MarvelAPI.swift */,
+				E8465A9B24DADD7F00581FC8 /* MarvelRepository.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -232,6 +238,9 @@
 			children = (
 				E8465AAF24DB4F7D00581FC8 /* ConfigureView.swift */,
 				E857DDBF2507E48E0053CAEB /* ViewController+CoreData.swift */,
+				CF3F649B261E747D00B49D5C /* GenericDAO.swift */,
+				CF3F649D261E77D800B49D5C /* Localizable.strings */,
+				CF3F649F261E78F100B49D5C /* GenericStructs.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -472,6 +481,7 @@
 				E88AFC8925A76831009EA1AA /* main.png in Resources */,
 				E84964F424DA2423003F4A2C /* LaunchScreen.storyboard in Resources */,
 				E88AFC8B25A76831009EA1AA /* detail.png in Resources */,
+				CF3F649E261E77D800B49D5C /* Localizable.strings in Resources */,
 				E8556DAC24F3F71800B06DEF /* MarvelRegular.ttf in Resources */,
 				E88AFC8A25A76831009EA1AA /* webview.png in Resources */,
 				E84964F124DA2423003F4A2C /* Assets.xcassets in Resources */,
@@ -605,6 +615,7 @@
 				E8E0E5C125A7436500A9E0BB /* CoreDataStack.swift in Sources */,
 				E84964E924DA2422003F4A2C /* MainViewController.swift in Sources */,
 				E8465AB024DB4F7D00581FC8 /* ConfigureView.swift in Sources */,
+				CF3F649C261E747D00B49D5C /* GenericDAO.swift in Sources */,
 				CF219668261B8143006FBC4C /* CustomAlertView.swift in Sources */,
 				E8B3344E25A63F33000BF896 /* DetailView.swift in Sources */,
 				E8E0E5BF25A73DE900A9E0BB /* WebViewModel.swift in Sources */,
@@ -612,7 +623,8 @@
 				E84964E524DA2422003F4A2C /* AppDelegate.swift in Sources */,
 				E84964EF24DA2422003F4A2C /* Marvel_App.xcdatamodeld in Sources */,
 				E857DDBE2507BC070053CAEB /* FavoriteListViewController.swift in Sources */,
-				E8465A9C24DADD7F00581FC8 /* MarvelAPI.swift in Sources */,
+				E8465A9C24DADD7F00581FC8 /* MarvelRepository.swift in Sources */,
+				CF3F64A0261E78F100B49D5C /* GenericStructs.swift in Sources */,
 				E88AFC8325A75A67009EA1AA /* FavoriteListView.swift in Sources */,
 				E8465AA824DB324600581FC8 /* HeroCustomCell.swift in Sources */,
 				E835EB7F250BE4240011001B /* Structs.swift in Sources */,

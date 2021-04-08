@@ -16,7 +16,6 @@ class DetailViewController: UIViewController {
     var viewModel: DetailViewModelProtocol
     var uiview: DetailView
     
-    
     // MARK: - Init
     
     init(viewModel: DetailViewModelProtocol) {
@@ -76,8 +75,6 @@ class DetailViewController: UIViewController {
         self.viewModel.showAlert = { [unowned self] message in
             let alert = CustomAlertViewController(message: message)
             alert.delegate = self
-            alert.modalPresentationStyle = .overFullScreen
-            alert.modalTransitionStyle = .crossDissolve
             self.show(alert, sender: nil)
         }
     }

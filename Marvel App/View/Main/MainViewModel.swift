@@ -8,39 +8,50 @@
 
 import Foundation
 
-protocol MainViewModelDelegate {
-    func reloadCollection()
+protocol MainViewModelProtocol {
+    var successRequest: (() -> Void)? { get set }
+    var failureRequest: ((String) -> Void)? { get set }
+    var heroes: [Hero] { get set }
+    func fetchHeroes(heroName: String?, newRequest: Bool)
+    func fetchHerosObjectFromCoraData() -> [HeroObject]?
+    func fetchMoreHeroes(afterTo index: Int)
 }
 
-class MainViewModel {
+class MainViewModel: MainViewModelProtocol{
     
+    // MARK: =============== Properties ===============
+    
+    var successRequest: (() -> Void)?
+    var failureRequest: ((String) -> Void)?
     let coreDataStack = CoreDataStack.shared
     var heroes: [Hero] = []
-    var delegate: MainViewModelDelegate?
-    lazy var service = MarvelAPI()
-    var currentPage = 0
-    var totalHeroesReturnedAPI = 0 // Armazena o total de heróis que a API retorna, serva para saber se precisamos pedir mais ou não.
+    private var repository: MarvelRepository
+    private var currentPage = 0
+    private var totalHeroesReturnedAPI = 0 // Armazena o total de heróis que a API retorna, serva para saber se precisamos pedir mais.
+    
+    // MARK: =============== Init ===============
+    
+    init(repository: MarvelRepository = MarvelRepository()) {
+        self.repository = repository
+    }
+    
+    // MARK: =============== Methods ===============
     
     func fetchHeroes(heroName: String?, newRequest: Bool) {
-        service.request(name: heroName, page: currentPage) { result in
+        repository.request(name: heroName, page: currentPage) { result in
             switch result {
-            case .success(let data):
-                do {
-                    let json = try JSONDecoder().decode(JSON.self, from: data)
-                    if let heroes = json.data?.results, let total = json.data?.total {
-                        if newRequest {
-                            self.heroes = heroes
-                        } else {
-                            self.heroes += heroes
-                        }
-                        self.totalHeroesReturnedAPI = total
-                        self.delegate?.reloadCollection()
+            case .success(let jsonObject):
+                if let heroes = jsonObject.data?.results, let total = jsonObject.data?.total {
+                    if newRequest {
+                        self.heroes = heroes
+                    } else {
+                        self.heroes += heroes
                     }
-                } catch {
-                    print(error.localizedDescription)
+                    self.totalHeroesReturnedAPI = total
+                    self.successRequest?()
                 }
             case .failure(let error):
-                print(error)
+                self.failureRequest?(error.message)
             }
         }
     }
