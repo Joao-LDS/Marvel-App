@@ -10,10 +10,14 @@ import UIKit
 
 class FavoriteListViewController: UIViewController {
     
-    let viewModel: FavoriteListViewModel
+    // MARK: =============== Properties ===============
+    
+    let viewModel: FavoriteListViewModelProtocol
     var uiview: FavoriteListView
     
-    init(viewModel: FavoriteListViewModel) {
+    // MARK: =============== Init ===============
+    
+    init(viewModel: FavoriteListViewModelProtocol) {
         self.viewModel = viewModel
         uiview = FavoriteListView()
         super.init(nibName: nil, bundle: nil)
@@ -23,18 +27,28 @@ class FavoriteListViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: =============== View Lifecicle ===============
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+        setupCollectionView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        viewModel.fetchHerosObject()
+        uiview.collection.reloadData()
     }
     
     override func loadView() {
         self.view = uiview
     }
     
+    // MARK: =============== Methods ===============
+    
     func configureView() {
         uiview.closeButton.addTarget(self, action: #selector(self.closeButtonPressed), for: .touchUpInside)
-        setupCollectionView()
     }
     
     func setupCollectionView() {
@@ -43,11 +57,15 @@ class FavoriteListViewController: UIViewController {
         uiview.collection.register(HeroCustomCell.self, forCellWithReuseIdentifier: "cell")
     }
     
+    // MARK: =============== Selectors ===============
+    
     @objc func closeButtonPressed() {
         dismiss(animated: true, completion: nil)
     }
 
 }
+
+// MARK: =============== UICollectionViewDelegateFlowLayout, UICollectionViewDataSource ===============
 
 extension FavoriteListViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
@@ -69,8 +87,8 @@ extension FavoriteListViewController: UICollectionViewDelegateFlowLayout, UIColl
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let hero = viewModel.convertHeroObjectToHero(index: indexPath.row)
         let viewModel = DetailViewModel(hero: hero)
-        let controller = DetailViewController(viewModel: viewModel)
-        controller.uiview.favoriteButton.isHidden = true
+        let controller = DetailViewController(viewModel: viewModel, showFromFavoriteList: true)
+        controller.modalPresentationStyle = .fullScreen
         present(controller, animated: true)
     }
     

@@ -10,6 +10,8 @@ import UIKit
 
 class UrlButton: UIButton {
     
+    // MARK: =============== Init ===============
+    
     init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
@@ -21,6 +23,8 @@ class UrlButton: UIButton {
     }
     
 }
+
+// MARK: =============== ConfigureView ===============
 
 extension UrlButton: ConfigureView {
     func addView() {}

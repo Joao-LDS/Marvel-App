@@ -11,7 +11,7 @@ import Kingfisher
 
 class HeroCustomCell: UICollectionViewCell {
     
-    // MARK: - Properties
+    // MARK: =============== Properties ===============
     
     lazy var imageView: UIImageView = {
         let view = UIImageView()
@@ -31,7 +31,7 @@ class HeroCustomCell: UICollectionViewCell {
         return view
     }()
     
-    // MARK: - Init
+    // MARK: =============== Init ===============
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -42,7 +42,7 @@ class HeroCustomCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Methods
+    // MARK: =============== Methods ===============
     
     func configureCell(_ hero: Hero) {
         namelabel.text = hero.name!.uppercased()
@@ -51,13 +51,12 @@ class HeroCustomCell: UICollectionViewCell {
         } else if let thumbnail = hero.thumbnail?.url {
             let url = URL(string: thumbnail)
             imageView.kf.setImage(with: url)
-            imageView.kf.indicatorType = .activity
         }
     }
     
 }
 
-// MARK: - ConfigureView
+// MARK: =============== ConfigureView ===============
 
 extension HeroCustomCell: ConfigureView {
     func addView() {
@@ -85,10 +84,9 @@ extension HeroCustomCell: ConfigureView {
     }
     
     func additionalConfiguration() {
-        
-//        imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 25
         imageView.layer.masksToBounds = true
+        imageView.backgroundColor = .red
         
         namelabel.font = UIFont(name: "Marvel-Regular", size: 38)
         namelabel.textColor = .white

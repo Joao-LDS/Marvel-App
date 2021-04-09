@@ -9,6 +9,8 @@
 import UIKit
 
 class FavoriteListView: UIView {
+    
+    // MARK: =============== Properties ===============
 
     lazy var closeButton: FloatButton = {
         let button = FloatButton()
@@ -24,6 +26,8 @@ class FavoriteListView: UIView {
         return collection
     }()
     
+    // MARK: =============== Init ===============
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         setupView()
@@ -34,6 +38,8 @@ class FavoriteListView: UIView {
     }
     
 }
+
+// MARK: =============== ConfigureView ===============
 
 extension FavoriteListView: ConfigureView {
     func addView() {
@@ -48,7 +54,7 @@ extension FavoriteListView: ConfigureView {
             collection.trailingAnchor.constraint(equalTo: trailingAnchor),
             collection.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            closeButton.topAnchor.constraint(equalTo: topAnchor, constant: 18),
+            closeButton.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: 18),
             closeButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 18)
         ])
     }

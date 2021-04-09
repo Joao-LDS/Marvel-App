@@ -14,8 +14,12 @@ protocol CustomAlertViewButtonDelegate {
 
 class CustomAlertViewController: UIViewController {
     
+    // MARK: =============== Properties ===============
+    
     var uiview: CustomAlertView
     var delegate: CustomAlertViewButtonDelegate?
+    
+    // MARK: =============== Init ===============
     
     init(message: String) {
         uiview = CustomAlertView()
@@ -28,14 +32,20 @@ class CustomAlertViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: =============== View Lifecicl ===============
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    // MARK: =============== Selectors ===============
     
     @objc func buttonPressed() {
         delegate?.buttonPressed()
     }
 }
+
+// MARK: =============== ConfigureView ===============
 
 extension CustomAlertViewController: ConfigureView {
     func addView() {

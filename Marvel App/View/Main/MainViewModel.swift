@@ -13,7 +13,6 @@ protocol MainViewModelProtocol {
     var failureRequest: ((String) -> Void)? { get set }
     var heroes: [Hero] { get set }
     func fetchHeroes(heroName: String?, newRequest: Bool)
-    func fetchHerosObjectFromCoraData() -> [HeroObject]?
     func fetchMoreHeroes(afterTo index: Int)
 }
 
@@ -62,9 +61,4 @@ class MainViewModel: MainViewModelProtocol{
             fetchHeroes(heroName: nil, newRequest: false)
         }
     }
-    
-    func fetchHerosObjectFromCoraData() -> [HeroObject]? {
-        return coreDataStack.fetchObjectHero()
-    }
-    
 }

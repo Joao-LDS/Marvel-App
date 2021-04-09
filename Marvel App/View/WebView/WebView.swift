@@ -10,6 +10,8 @@ import UIKit
 import WebKit
 
 class WebView: UIView {
+    
+    // MARK: =============== Properties ===============
 
     lazy var webview: UIWebView = {
         let webview = UIWebView(frame: UIScreen.main.bounds)
@@ -29,6 +31,8 @@ class WebView: UIView {
         return view
     }()
     
+    // MARK: =============== Init ===============
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         setupView()
@@ -40,7 +44,7 @@ class WebView: UIView {
     
 }
 
-// MARK: - ConfigureView
+// MARK: =============== ConfigureView ===============
 
 extension WebView: ConfigureView {
     func addView() {

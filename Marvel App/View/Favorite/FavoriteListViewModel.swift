@@ -9,12 +9,23 @@
 import Foundation
 import CoreData
 
-class FavoriteListViewModel {
+protocol FavoriteListViewModelProtocol {
+    var herosObject: [HeroObject]? { get set }
+    func convertHeroObjectToHero(index: Int) -> Hero
+    func fetchHerosObject()
+}
+
+class FavoriteListViewModel: FavoriteListViewModelProtocol {
     
-    let herosObject: [HeroObject]?
+    // MARK: =============== Properties ===============
     
-    init(herosObject: [HeroObject]?) {
-        self.herosObject = herosObject
+    var herosObject: [HeroObject]?
+    private let coreDataStack = CoreDataStack.shared
+    
+    // MARK: =============== Methods ===============
+    
+    func fetchHerosObject() {
+        herosObject = coreDataStack.fetchObjectHero()
     }
     
     func convertHeroObjectToHero(index: Int) -> Hero {

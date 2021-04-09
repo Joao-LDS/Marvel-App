@@ -9,6 +9,8 @@
 import UIKit
 
 class CustomAlertView: UIView {
+    
+    // MARK: =============== Properties ===============
 
     lazy var container: UIView = {
         let view = UIView()
@@ -33,6 +35,8 @@ class CustomAlertView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    // MARK: =============== Init ===============
 
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -44,6 +48,8 @@ class CustomAlertView: UIView {
     }
     
 }
+
+// MARK: =============== ConfigureView ===============
 
 extension CustomAlertView: ConfigureView {
     func addView() {

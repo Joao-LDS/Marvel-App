@@ -88,9 +88,9 @@ class MainViewController: UIViewController {
     }
     
     @objc func favoriteButtonPressed() {
-        let heros = viewModel.fetchHerosObjectFromCoraData()
-        let viewModel = FavoriteListViewModel(herosObject: heros)
+        let viewModel = FavoriteListViewModel()
         let controller = FavoriteListViewController(viewModel: viewModel)
+        controller.modalPresentationStyle = .fullScreen
         present(controller, animated: true)
     }
     

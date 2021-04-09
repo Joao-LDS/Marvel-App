@@ -11,12 +11,12 @@ import UIKit
 
 class WebViewController: UIViewController {
     
-    // MARK: - Properties
+    // MARK: =============== Properties ===============
     
     let viewModel: WebViewModel
     var uiview: WebView
     
-    // MARK: - Init
+    // MARK: =============== Init ===============
 
     init(viewModel: WebViewModel) {
         self.viewModel = viewModel
@@ -28,7 +28,7 @@ class WebViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - View Lifecicle
+    // MARK: =============== View Lifecicle ===============
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +40,7 @@ class WebViewController: UIViewController {
         self.view = uiview
     }
     
-    // MARK: - Functions
+    // MARK: =============== Functions ===============
     
     func configureView() {
         uiview.webview.loadRequest(viewModel.request)
@@ -48,14 +48,14 @@ class WebViewController: UIViewController {
         uiview.closeButton.addTarget(self, action: #selector(self.dismissView), for: .touchUpInside)
     }
     
-    // MARK: - Selectors
+    // MARK: =============== Selectors ===============
     
     @objc func dismissView() {
         dismiss(animated: true)
     }
 }
 
-// MARK: - UIWebViewDelegate
+// MARK: =============== UIWebViewDelegate ===============
 
 extension WebViewController: UIWebViewDelegate {
     func webViewDidFinishLoad(_ webView: UIWebView) {

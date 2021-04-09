@@ -9,12 +9,16 @@
 import UIKit
 
 class FloatButton: UIButton {
+    
+    // MARK: =============== Properties ===============
 
     lazy var imageview: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    // MARK: =============== Init ===============
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -26,6 +30,8 @@ class FloatButton: UIButton {
     }
     
 }
+
+// MARK: =============== ConfigureView ===============
 
 extension FloatButton: ConfigureView {
     func addView() {
@@ -45,7 +51,6 @@ extension FloatButton: ConfigureView {
     }
     
     func additionalConfiguration() {
-        
         backgroundColor = .red
         layer.cornerRadius = 25
         layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -54,5 +59,4 @@ extension FloatButton: ConfigureView {
         layer.shadowOpacity = 0.5
 
     }
-
 }

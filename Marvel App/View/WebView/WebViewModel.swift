@@ -10,7 +10,11 @@ import Foundation
 
 class WebViewModel {
     
+    // MARK: =============== Properties ===============
+    
     let request: URLRequest
+    
+    // MARK: =============== Init ===============
     
     init(request: URLRequest) {
         self.request = request
