@@ -13,7 +13,7 @@ class CoreDataStack {
     
     static let shared = CoreDataStack()
         
-    var persistentContainer: NSPersistentContainer {
+    lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Marvel_App")
         container.loadPersistentStores { storeDescription, error in
             if let error = error {
@@ -21,22 +21,10 @@ class CoreDataStack {
             }
         }
         return container
-    }
-    
-    var getFetchResultController: NSFetchedResultsController<HeroObject>? {
-        return NSFetchedResultsController(fetchRequest: getFetchResult, managedObjectContext: self.context, sectionNameKeyPath: nil, cacheName: nil)
-    }
-    
-    var getFetchResult: NSFetchRequest<HeroObject> {
-        let sort = NSSortDescriptor(key: "name", ascending: true)
-        let request: NSFetchRequest<HeroObject> = HeroObject.fetchRequest()
-        request.sortDescriptors = [sort]
-        request.predicate = nil
-        return request
-    }
+    }()
     
     var context: NSManagedObjectContext {
-        return self.persistentContainer.viewContext
+        persistentContainer.viewContext
     }
     
     var entity: NSEntityDescription {
@@ -44,47 +32,37 @@ class CoreDataStack {
         return entity!
     }
     
-    func save() throws {
+    func save() {
         do {
             try context.save()
         } catch {
-            print("DEBUG: CoreData Error - \(error.localizedDescription)")
+            debugPrint(error.localizedDescription)
         }
     }
     
-    func delete(hero name: String) -> Bool {
-        let predicate = NSPredicate(format: "name == %@", name)
-        let request = getFetchResult
-        request.predicate = predicate
-        
-        if let heros = try? context.fetch(request) {
-            for hero in heros {
-                context.delete(hero)
-            }
-        }
-        do {
-            try save()
-            return true
-        } catch {
-            return false
-        }
-    }
+    lazy var fetchedResultController: NSFetchedResultsController<HeroObject>? = {
+        let sort = NSSortDescriptor(key: "name", ascending: true)
+        let request: NSFetchRequest<HeroObject> = HeroObject.fetchRequest()
+        request.sortDescriptors = [sort]
+        request.predicate = nil
+        return NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+    }()
     
     func fetchObjectHero() -> [HeroObject]? {
-        let fetchedResultController = getFetchResultController
+        let fetchedResultControllerHeroObject = fetchedResultController
 
         do {
-            try fetchedResultController?.performFetch()
-            return fetchedResultController?.fetchedObjects
+            try fetchedResultControllerHeroObject?.performFetch()
+            return fetchedResultControllerHeroObject?.fetchedObjects
         } catch {
-            print(error.localizedDescription)
+            debugPrint(error.localizedDescription)
             return nil
         }
     }
     
     func heroDidSaved(_ name: String) -> Bool {
         let predicate = NSPredicate(format: "name == %@", name)
-        let fetchedResultController = getFetchResultController
+        let fetchedResultController = fetchedResultController
         fetchedResultController?.fetchRequest.predicate = predicate
         
         do {
@@ -96,6 +74,19 @@ class CoreDataStack {
             }
         } catch {
             print(error.localizedDescription)
+            return false
+        }
+    }
+    
+    func delete(hero: String) -> Bool {
+        let predicate = NSPredicate(format: "name == %@", hero)
+        let fetchedResultController = fetchedResultController
+        fetchedResultController?.fetchRequest.predicate = predicate
+        
+        if let hero = fetchedResultController?.fetchedObjects?.first {
+            context.delete(hero)
+            return true
+        } else {
             return false
         }
     }

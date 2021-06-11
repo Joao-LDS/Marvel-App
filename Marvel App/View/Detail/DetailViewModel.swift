@@ -51,13 +51,14 @@ class DetailViewModel: DetailViewModelProtocol {
             var urlsObjectArray: [UrlsObject] = []
             for url in urls {
                 let urlObject = UrlsObject(context: coreDataStack.context)
+                urlObject.hero = heroObject
                 urlObject.type = url.type
                 urlObject.url = url.url
                 urlsObjectArray.append(urlObject)
             }
             heroObject.urls = NSSet(array: urlsObjectArray)
             
-            _ = try? coreDataStack.save()
+            coreDataStack.save()
             
             self.showAlert?("\(hero.name ?? "") salvo com sucesso.")
         }
