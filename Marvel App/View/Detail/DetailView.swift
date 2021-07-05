@@ -9,6 +9,8 @@
 import UIKit
 
 class DetailView: UIView {
+    
+    // MARK: =============== Properties ===============
 
     lazy var scrollView: UIScrollView = {
         let view = UIScrollView()
@@ -48,11 +50,13 @@ class DetailView: UIView {
         return view
     }()
     
-    lazy var favoriteButton: FloatButton = {
+    lazy var functionButton: FloatButton = {
         let button = FloatButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    // MARK: =============== Init ===============
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -62,6 +66,8 @@ class DetailView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: =============== Methods ===============
     
     func createButtonsToUrls(with titles: [String]) {
         for title in titles {
@@ -84,14 +90,14 @@ class DetailView: UIView {
     
 }
 
-// MARK: - ConfigureView
+// MARK: =============== ConfigureView ===============
 
 extension DetailView: ConfigureView {
     func addView() {
         addSubview(scrollView)
         scrollView.addSubview(imageView)
         scrollView.addSubview(closeButton)
-        scrollView.addSubview(favoriteButton)
+        scrollView.addSubview(functionButton)
         scrollView.addSubview(nameLabel)
         scrollView.addSubview(descriptionLabel)
         scrollView.addSubview(stackView)
@@ -104,8 +110,8 @@ extension DetailView: ConfigureView {
             scrollView.rightAnchor.constraint(equalTo: rightAnchor),
             scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            favoriteButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 18),
-            favoriteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -18),
+            functionButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 18),
+            functionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -18),
             
             closeButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 18),
             closeButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 18),
@@ -151,7 +157,7 @@ extension DetailView: ConfigureView {
         stackView.distribution = .fillEqually
         stackView.spacing = 8
         
-        favoriteButton.imageview.image = #imageLiteral(resourceName: "favorite")
+        functionButton.imageview.image = #imageLiteral(resourceName: "favorite")
     }
     
 }

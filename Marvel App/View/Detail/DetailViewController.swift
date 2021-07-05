@@ -11,25 +11,27 @@ import Kingfisher
 
 class DetailViewController: UIViewController {
     
-    // MARK: - Properties
+    // MARK: =============== Properties ===============
     
-    let viewModel: DetailViewModel
-    var uiview: DetailView
+    private var viewModel: DetailViewModelProtocol
+    private var uiview: DetailView
+    private let showFromFavoriteList: Bool
     
+    // MARK: =============== Init ===============
     
-    // MARK: - Init
-    
-    init(viewModel: DetailViewModel) {
+    init(viewModel: DetailViewModelProtocol, showFromFavoriteList: Bool = false) {
         self.viewModel = viewModel
+        self.showFromFavoriteList = showFromFavoriteList
         uiview = DetailView()
         super.init(nibName: nil, bundle: nil)
+        bind()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - View Lifecicle
+    // MARK: =============== View Lifecicle ===============
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,12 +42,17 @@ class DetailViewController: UIViewController {
         self.view = uiview
     }
     
-    // MARK: - Methods
+    // MARK: =============== Methods ===============
     
     func configureView() {
         uiview.closeButton.addTarget(self, action: #selector(self.closeButtonTapped), for: .touchUpInside)
         
-        uiview.favoriteButton.addTarget(self, action: #selector(self.favoriteButtonTapped), for: .touchUpInside)
+        if showFromFavoriteList {
+            uiview.functionButton.imageview.image = UIImage(named: "trash")
+            uiview.functionButton.addTarget(self, action: #selector(self.deleteButtonTapped), for: .touchUpInside)
+        } else {
+            uiview.functionButton.addTarget(self, action: #selector(self.favoriteButtonTapped), for: .touchUpInside)
+        }
         
         let hero = viewModel.hero
         
@@ -69,10 +76,17 @@ class DetailViewController: UIViewController {
         for button in uiview.urlButtons {
             button.addTarget(self, action: #selector(self.urlButtonTapped(_:)), for: .touchUpInside)
         }
-        
     }
     
-    // MARK: - Selectors
+    func bind() {
+        self.viewModel.showAlert = { [unowned self] message in
+            let alert = CustomAlertViewController(message: message)
+            alert.delegate = self
+            self.show(alert, sender: nil)
+        }
+    }
+    
+    // MARK: =============== Selectors ===============
     
     @objc func urlButtonTapped(_ sender: UIButton) {
         guard let index = uiview.stackView.arrangedSubviews.firstIndex(of: sender) else { return }
@@ -91,6 +105,20 @@ class DetailViewController: UIViewController {
         let image = uiview.imageView.image
         let data = image?.jpegData(compressionQuality: 1.0)
         viewModel.saveHero(image: data!)
-        dismiss(animated: true)
+    }
+    
+    @objc func deleteButtonTapped() {
+        viewModel.deleteHero()
+    }
+}
+
+// MARK: =============== CustomAlertViewButtonDelegate ===============
+
+extension DetailViewController: CustomAlertViewButtonDelegate {
+    func buttonPressed() {
+        closeButtonTapped()
+        if showFromFavoriteList {
+            closeButtonTapped()
+        }
     }
 }

@@ -10,12 +10,14 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    // MARK: - Properties
+    // MARK: =============== Properties ===============
 
-    let viewModel: MainViewModel
-    var uiview: MainView
+    private var viewModel: MainViewModelProtocol
+    private var uiview: MainView
     
-    init(viewModel: MainViewModel) {
+    // MARK: =============== Init ===============
+    
+    init(viewModel: MainViewModelProtocol) {
         self.viewModel = viewModel
         uiview = MainView()
         super.init(nibName: nil, bundle: nil)
@@ -25,25 +27,29 @@ class MainViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - View Lifecicle
+    // MARK: =============== View Lifecicle ===============
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.delegate = self
-        addToolbarKeyboard()
         configureView()
+        setupCollectionView()
+        addGestureToDismissKeyboard()
+        bind()
     }
     
     override func loadView() {
         self.view = uiview
     }
     
-    // MARK: - Methods
+    // MARK: =============== Methods ===============
     
     func configureView() {
         uiview.searchButton.addTarget(self, action: #selector(self.searchButtonPressed), for: .touchUpInside)
         uiview.favoriteButton.addTarget(self, action: #selector(self.favoriteButtonPressed), for: .touchUpInside)
-        setupCollectionView()
+        
+        uiview.searchTextField.delegate = self
+        
+        uiview.label.text = "BUSQUE UM PERSONAGEM"
     }
     
     func setupCollectionView() {
@@ -52,42 +58,59 @@ class MainViewController: UIViewController {
         uiview.collection.register(HeroCustomCell.self, forCellWithReuseIdentifier: "cell")
     }
     
-    func addToolbarKeyboard() {
-        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
-        let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissKeyboard))
-        toolbar.setItems([flexible, cancel], animated: true)
+    func addGestureToDismissKeyboard() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        uiview.collection.addGestureRecognizer(tap)
     }
     
-    // MARK: - Selectors
+    func bind() {
+        viewModel.successRequest = { [unowned self] in
+            self.uiview.activityIndicator.stopAnimating()
+            self.uiview.collection.reloadData()
+        }
+        
+        viewModel.failureRequest = { [unowned self] message in
+            self.uiview.activityIndicator.stopAnimating()
+            self.uiview.label.isHidden = false
+            self.uiview.label.text = message.uppercased()
+        }
+    }
+    
+    // MARK: =============== Selectors ===============
     
     @objc func searchButtonPressed() {
+        self.uiview.label.isHidden = true
+        self.uiview.activityIndicator.startAnimating()
         guard let heroName = uiview.searchTextField.text else { return }
         viewModel.fetchHeroes(heroName: heroName, newRequest: true)
+        dismissKeyboard()
     }
     
     @objc func favoriteButtonPressed() {
-        let heros = viewModel.fetchHerosObjectFromCoraData()
-        let viewModel = FavoriteListViewModel(herosObject: heros)
+        let viewModel = FavoriteListViewModel()
         let controller = FavoriteListViewController(viewModel: viewModel)
+        controller.modalPresentationStyle = .fullScreen
         present(controller, animated: true)
     }
     
     @objc func dismissKeyboard() {
-//        searchBar.resignFirstResponder()
+        view.endEditing(true)
     }
     
 }
 
-// MARK: - MainViewModelDelegate
+// MARK: =============== MainViewModelDelegate ===============
 
-extension MainViewController: MainViewModelDelegate {
-    func reloadCollection() {
-        uiview.collection.reloadData()
+extension MainViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        dismissKeyboard()
+        searchButtonPressed()
+        return true
     }
 }
 
-// MARK: - UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
+// MARK: =============== UICollectionViewDelegateFlowLayout, UICollectionViewDataSource ===============
 
 extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     

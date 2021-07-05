@@ -12,7 +12,6 @@ import CoreData
 class CoreDataStack {
     
     static let shared = CoreDataStack()
-    var fetchedResultControllerHeroObject: NSFetchedResultsController<HeroObject>?
         
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Marvel_App")
@@ -25,7 +24,7 @@ class CoreDataStack {
     }()
     
     var context: NSManagedObjectContext {
-        return self.persistentContainer.viewContext
+        persistentContainer.viewContext
     }
     
     var entity: NSEntityDescription {
@@ -37,23 +36,44 @@ class CoreDataStack {
         do {
             try context.save()
         } catch {
-            print("DEBUG: CoreData Error - \(error.localizedDescription)")
+            debugPrint(error.localizedDescription)
         }
     }
     
-    func fetchObjectHero() -> [HeroObject]? {
+    var fetchedResultController: NSFetchedResultsController<HeroObject>? {
         let sort = NSSortDescriptor(key: "name", ascending: true)
         let request: NSFetchRequest<HeroObject> = HeroObject.fetchRequest()
         request.sortDescriptors = [sort]
-        fetchedResultControllerHeroObject = NSFetchedResultsController(fetchRequest: request, managedObjectContext: self.context, sectionNameKeyPath: nil, cacheName: nil)
-
+        request.predicate = nil
+        return NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+    }
+    
+    func fetchObjectHero(_ argument: String? = nil) -> [HeroObject]? {
+        let fetchedResultController = fetchedResultController
+        if let argument = argument {
+            let predicate = NSPredicate(format: "name == %@", argument)
+            fetchedResultController?.fetchRequest.predicate = predicate
+        }
+        
         do {
-            try fetchedResultControllerHeroObject?.performFetch()
-            return fetchedResultControllerHeroObject?.fetchedObjects
+            try fetchedResultController?.performFetch()
+            return fetchedResultController?.fetchedObjects
         } catch {
-            print(error.localizedDescription)
+            debugPrint(error.localizedDescription)
             return nil
         }
+    }
+    
+    func heroDidSaved(_ name: String) -> Bool {
+        guard let objects = fetchObjectHero(name) else { return false }
+        return objects.count > 0 ? true :  false
+    }
+    
+    func delete(hero: String) -> Bool {
+        guard let hero = fetchObjectHero(hero)?.first else { return false }
+        context.delete(hero)
+        save()
+        return true
     }
     
 }
