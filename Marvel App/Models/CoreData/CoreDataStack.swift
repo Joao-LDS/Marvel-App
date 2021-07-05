@@ -40,20 +40,24 @@ class CoreDataStack {
         }
     }
     
-    lazy var fetchedResultController: NSFetchedResultsController<HeroObject>? = {
+    var fetchedResultController: NSFetchedResultsController<HeroObject>? {
         let sort = NSSortDescriptor(key: "name", ascending: true)
         let request: NSFetchRequest<HeroObject> = HeroObject.fetchRequest()
         request.sortDescriptors = [sort]
         request.predicate = nil
         return NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-    }()
+    }
     
-    func fetchObjectHero() -> [HeroObject]? {
-        let fetchedResultControllerHeroObject = fetchedResultController
-
+    func fetchObjectHero(_ argument: String? = nil) -> [HeroObject]? {
+        let fetchedResultController = fetchedResultController
+        if let argument = argument {
+            let predicate = NSPredicate(format: "name == %@", argument)
+            fetchedResultController?.fetchRequest.predicate = predicate
+        }
+        
         do {
-            try fetchedResultControllerHeroObject?.performFetch()
-            return fetchedResultControllerHeroObject?.fetchedObjects
+            try fetchedResultController?.performFetch()
+            return fetchedResultController?.fetchedObjects
         } catch {
             debugPrint(error.localizedDescription)
             return nil
@@ -61,34 +65,15 @@ class CoreDataStack {
     }
     
     func heroDidSaved(_ name: String) -> Bool {
-        let predicate = NSPredicate(format: "name == %@", name)
-        let fetchedResultController = fetchedResultController
-        fetchedResultController?.fetchRequest.predicate = predicate
-        
-        do {
-            try fetchedResultController?.performFetch()
-            if fetchedResultController?.fetchedObjects?.count != 0 {
-                return true
-            } else {
-                return false
-            }
-        } catch {
-            print(error.localizedDescription)
-            return false
-        }
+        guard let objects = fetchObjectHero(name) else { return false }
+        return objects.count > 0 ? true :  false
     }
     
     func delete(hero: String) -> Bool {
-        let predicate = NSPredicate(format: "name == %@", hero)
-        let fetchedResultController = fetchedResultController
-        fetchedResultController?.fetchRequest.predicate = predicate
-        
-        if let hero = fetchedResultController?.fetchedObjects?.first {
-            context.delete(hero)
-            return true
-        } else {
-            return false
-        }
+        guard let hero = fetchObjectHero(hero)?.first else { return false }
+        context.delete(hero)
+        save()
+        return true
     }
     
 }

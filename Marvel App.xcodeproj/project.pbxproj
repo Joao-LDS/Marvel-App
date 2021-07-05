@@ -33,7 +33,6 @@
 		E849650A24DA2423003F4A2C /* Marvel_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E849650924DA2423003F4A2C /* Marvel_AppUITests.swift */; };
 		E8556DAC24F3F71800B06DEF /* MarvelRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E8556DAB24F3F6C500B06DEF /* MarvelRegular.ttf */; };
 		E857DDBE2507BC070053CAEB /* FavoriteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857DDBD2507BC070053CAEB /* FavoriteListViewController.swift */; };
-		E857DDC02507E48E0053CAEB /* ViewController+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857DDBF2507E48E0053CAEB /* ViewController+CoreData.swift */; };
 		E857DDC22507F13A0053CAEB /* FavoriteListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857DDC12507F13A0053CAEB /* FavoriteListViewModel.swift */; };
 		E85E414824EDA03100F65826 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85E414724EDA03100F65826 /* WebViewController.swift */; };
 		E88AFC8325A75A67009EA1AA /* FavoriteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88AFC8225A75A67009EA1AA /* FavoriteListView.swift */; };
@@ -106,7 +105,6 @@
 		E849651824DA2CC8003F4A2C /* Stevia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Stevia.framework; path = Carthage/Build/iOS/Stevia.framework; sourceTree = "<group>"; };
 		E8556DAB24F3F6C500B06DEF /* MarvelRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MarvelRegular.ttf; sourceTree = "<group>"; };
 		E857DDBD2507BC070053CAEB /* FavoriteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListViewController.swift; sourceTree = "<group>"; };
-		E857DDBF2507E48E0053CAEB /* ViewController+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+CoreData.swift"; sourceTree = "<group>"; };
 		E857DDC12507F13A0053CAEB /* FavoriteListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListViewModel.swift; sourceTree = "<group>"; };
 		E85E414724EDA03100F65826 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		E88AFC8225A75A67009EA1AA /* FavoriteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListView.swift; sourceTree = "<group>"; };
@@ -162,6 +160,49 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		7970304826934101001BBC2F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7970304926934152001BBC2F /* Favorite */,
+				7970304A2693415B001BBC2F /* WebView */,
+				7970304B26934162001BBC2F /* Detail */,
+				7970304C26934169001BBC2F /* Main */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		7970304926934152001BBC2F /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				E857DDC12507F13A0053CAEB /* FavoriteListViewModel.swift */,
+			);
+			path = Favorite;
+			sourceTree = "<group>";
+		};
+		7970304A2693415B001BBC2F /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				E8E0E5BE25A73DE900A9E0BB /* WebViewModel.swift */,
+			);
+			path = WebView;
+			sourceTree = "<group>";
+		};
+		7970304B26934162001BBC2F /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				E8465AB124DB512B00581FC8 /* DetailViewModel.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		7970304C26934169001BBC2F /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				E8465AAA24DB3BA600581FC8 /* MainViewModel.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		CF219669261B8F69006FBC4C /* CustomAlert */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,7 +226,6 @@
 		E836B1A325A3B54900662E10 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				E8465AAA24DB3BA600581FC8 /* MainViewModel.swift */,
 				E84964E824DA2422003F4A2C /* MainViewController.swift */,
 				E836B1A425A3B56800662E10 /* MainView.swift */,
 			);
@@ -195,6 +235,7 @@
 		E8465A9024DAD99D00581FC8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E84964ED24DA2422003F4A2C /* Marvel_App.xcdatamodeld */,
 				E88AFC8425A767E6009EA1AA /* CoreData */,
 				E835EB7E250BE4240011001B /* Structs.swift */,
 			);
@@ -237,7 +278,6 @@
 			isa = PBXGroup;
 			children = (
 				E8465AAF24DB4F7D00581FC8 /* ConfigureView.swift */,
-				E857DDBF2507E48E0053CAEB /* ViewController+CoreData.swift */,
 				CF3F649B261E747D00B49D5C /* GenericDAO.swift */,
 				CF3F649D261E77D800B49D5C /* Localizable.strings */,
 				CF3F649F261E78F100B49D5C /* GenericStructs.swift */,
@@ -270,13 +310,13 @@
 		E84964E324DA2421003F4A2C /* Marvel App */ = {
 			isa = PBXGroup;
 			children = (
+				7970304826934101001BBC2F /* ViewModel */,
 				E8465AA624DB299D00581FC8 /* View */,
 				E8465A9024DAD99D00581FC8 /* Models */,
 				E8465A9A24DADD6400581FC8 /* Service */,
 				E8465AA524DB228D00581FC8 /* Support */,
 				E8465AAE24DB4F6600581FC8 /* Util */,
 				E84964F524DA2423003F4A2C /* Info.plist */,
-				E84964ED24DA2422003F4A2C /* Marvel_App.xcdatamodeld */,
 			);
 			path = "Marvel App";
 			sourceTree = "<group>";
@@ -343,7 +383,6 @@
 			isa = PBXGroup;
 			children = (
 				E8465AAC24DB4F1600581FC8 /* DetailViewController.swift */,
-				E8465AB124DB512B00581FC8 /* DetailViewModel.swift */,
 				E8B3344D25A63F33000BF896 /* DetailView.swift */,
 			);
 			path = Detail;
@@ -354,7 +393,6 @@
 			children = (
 				E85E414724EDA03100F65826 /* WebViewController.swift */,
 				E8E0E5BC25A73DC700A9E0BB /* WebView.swift */,
-				E8E0E5BE25A73DE900A9E0BB /* WebViewModel.swift */,
 			);
 			path = WebView;
 			sourceTree = "<group>";
@@ -363,7 +401,6 @@
 			isa = PBXGroup;
 			children = (
 				E857DDBD2507BC070053CAEB /* FavoriteListViewController.swift */,
-				E857DDC12507F13A0053CAEB /* FavoriteListViewModel.swift */,
 				E88AFC8225A75A67009EA1AA /* FavoriteListView.swift */,
 			);
 			path = Favorite;
@@ -637,7 +674,6 @@
 				CF21966B261B8FA8006FBC4C /* CustomAlertViewController.swift in Sources */,
 				E85E414824EDA03100F65826 /* WebViewController.swift in Sources */,
 				E8465AAB24DB3BA600581FC8 /* MainViewModel.swift in Sources */,
-				E857DDC02507E48E0053CAEB /* ViewController+CoreData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
